@@ -1,7 +1,3 @@
-//
-// Created by ziga zoric on 24.05.25.
-//
-
 #include "RegisterWindow/RegisterWindow.h"
 #include "PopOutWindow.h"
 #include <QtWidgets>
@@ -9,10 +5,7 @@
 #include <QBoxLayout>
 #include <QLabel>
 
-
-
-int PopOutWindow::run(int argc, char *argv[]) {
-    QApplication app(argc, argv);
+QWidget* PopOutWindow::createWindow() {
     QWidget *window = new QWidget;
     window->resize(480, 360);
     window->setWindowTitle("Bank app");
@@ -25,10 +18,9 @@ int PopOutWindow::run(int argc, char *argv[]) {
     QLineEdit *password = new QLineEdit(window);
     password->setEchoMode(QLineEdit::Password);
 
-    username->setPlaceholderText("Username");
+    username->setPlaceholderText("Email");
     password->setPlaceholderText("Password");
 
-    // ✅ Input styles
     QString inputStyle = R"(
         QLineEdit {
             padding: 8px;
@@ -36,16 +28,20 @@ int PopOutWindow::run(int argc, char *argv[]) {
             border: 2px solid #ccc;
             border-radius: 8px;
             background-color: #f8f8f8;
+            color: black;
+        }
+        QLineEdit::placeholder {
+            color: black;
         }
         QLineEdit:focus {
             border: 2px solid #0078D7;
             background-color: #ffffff;
         }
     )";
+
     username->setStyleSheet(inputStyle);
     password->setStyleSheet(inputStyle);
 
-    // ✅ Button style
     QString buttonStyle = R"(
         QPushButton {
             background-color: #0078D7;
@@ -62,9 +58,9 @@ int PopOutWindow::run(int argc, char *argv[]) {
     QPushButton *loginButton = new QPushButton("Login", window);
     loginButton->setStyleSheet(buttonStyle);
 
-    QObject::connect(loginButton,&QPushButton::clicked, [&] {
+    QObject::connect(loginButton, &QPushButton::clicked, [=]() {
         if (username->text().isEmpty() || password->text().isEmpty()) {
-            QMessageBox::warning(window,"Invalid Input", "Username and password can't be emtpy!");
+            QMessageBox::warning(window, "Invalid Input", "Username and password can't be empty!");
         }
     });
 
@@ -74,10 +70,11 @@ int PopOutWindow::run(int argc, char *argv[]) {
     QPushButton *registerButton = new QPushButton("Register", window);
     registerButton->setStyleSheet(buttonStyle);
 
-    QObject::connect(registerButton, &QPushButton::clicked, [&]() {
+    QObject::connect(registerButton, &QPushButton::clicked, [=]() {
         RegisterWindow rw;
         QWidget *regWindow = rw.registerWindow();
         regWindow->show();
+        window->close(); // close login window if you want
     });
 
     QVBoxLayout *boxLayout = new QVBoxLayout(window);
@@ -93,7 +90,12 @@ int PopOutWindow::run(int argc, char *argv[]) {
     boxLayout->addWidget(registerButton);
 
     window->setLayout(boxLayout);
-    window->show();
+    return window;
+}
 
+int PopOutWindow::run(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+    QWidget *window = createWindow();
+    window->show();
     return app.exec();
 }
