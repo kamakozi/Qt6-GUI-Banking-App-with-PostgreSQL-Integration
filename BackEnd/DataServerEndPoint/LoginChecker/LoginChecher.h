@@ -4,11 +4,14 @@
 
 #ifndef LOGINCHECHER_H
 #define LOGINCHECHER_H
+#include <QString>
 
+#include "UserData.h"
 
 
 class LoginChecher {
-
+public:
+    std::optional<UserData> loginChecker(const QString& email,const QString& password);
 };
 
 

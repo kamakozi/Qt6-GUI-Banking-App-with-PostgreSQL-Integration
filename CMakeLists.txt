@@ -40,6 +40,9 @@ add_executable(qtlearn
         BackEnd/DataServerEndPoint/registerUser/PasswordHash/PasswordHash.h
         BackEnd/DataServerEndPoint/LoginChecker/LoginChecher.cpp
         BackEnd/DataServerEndPoint/LoginChecker/LoginChecher.h
+        FrontEnd/MainWindow/MainBank/MainBankWindow/MainBankWindow.cpp
+        FrontEnd/MainWindow/MainBank/MainBankWindow/MainBankWindow.h
+        BackEnd/DataServerEndPoint/LoginChecker/UserData.h
 )
 
 # ✅ Link libraries

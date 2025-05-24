@@ -118,6 +118,10 @@ QWidget* RegisterWindow::registerWindow() {
         RegisterUser ru;
         if (ru.insertUser(usernameInput,hashedPass,emailInput)) {
             QMessageBox::information(window,"Success","User registered!");
+            PopOutWindow pow;
+            QWidget *backToLog = pow.createWindow();
+            backToLog->show();
+            window->close();
         }else {
             QMessageBox::warning(window,"Error", "Unable to register user.");
         }

@@ -4,6 +4,8 @@
 #include <QApplication>
 #include <QBoxLayout>
 #include <QLabel>
+#include "../../BackEnd/DataServerEndPoint/LoginChecker/LoginChecher.h"
+#include "../MainWindow/MainBank/MainBankWindow/MainBankWindow.h"
 
 QWidget* PopOutWindow::createWindow() {
     QWidget *window = new QWidget;
@@ -58,10 +60,27 @@ QWidget* PopOutWindow::createWindow() {
     QPushButton *loginButton = new QPushButton("Login", window);
     loginButton->setStyleSheet(buttonStyle);
 
+
+
     QObject::connect(loginButton, &QPushButton::clicked, [=]() {
+        QString usernameInput = username->text();
+        QString passwordInput = password->text();
         if (username->text().isEmpty() || password->text().isEmpty()) {
             QMessageBox::warning(window, "Invalid Input", "Username and password can't be empty!");
         }
+
+        bool loginUser(const QString& stringUsername, const QString& passwordInput);
+
+        LoginChecher lc;
+        auto user = lc.loginChecker(usernameInput,passwordInput);
+        if (user.has_value()){
+            MainBankWindow mbw;
+            mbw.mainBankWindow(user.value());
+            window->close();
+        }else {
+            QMessageBox::warning(window,"Login error!" ,"Wrong credentials!");
+        }
+
     });
 
     QLabel *donthaveacc = new QLabel("Don't have an account?", window);
@@ -74,7 +93,7 @@ QWidget* PopOutWindow::createWindow() {
         RegisterWindow rw;
         QWidget *regWindow = rw.registerWindow();
         regWindow->show();
-        window->close(); // close login window if you want
+        window->close();
     });
 
     QVBoxLayout *boxLayout = new QVBoxLayout(window);
