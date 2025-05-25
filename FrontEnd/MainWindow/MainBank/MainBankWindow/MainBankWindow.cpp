@@ -6,6 +6,7 @@
 #include "Deposit/DepositFrontEnd.h"
 #include "Withdraw/WithdrawFront.h"
 #include "ShowInfo/ShowInfo.h"
+#include "Transactions/TransactionFront.h"
 
 QWidget* MainBankWindow::mainBankWindow(const UserData& user) {
     QWidget* window = new QWidget;
@@ -57,12 +58,15 @@ QWidget* MainBankWindow::mainBankWindow(const UserData& user) {
     QPushButton* depositButton = new QPushButton("Deposit");
     QPushButton* withdrawButton = new QPushButton("Withdraw");
     QPushButton* userInfoButton = new QPushButton("User Info");
+    QPushButton* makeTransactionButton= new QPushButton("Transfer money");
+
 
     QVBoxLayout* buttonLayout = new QVBoxLayout;
     buttonLayout->setSpacing(15);
     buttonLayout->addWidget(depositButton);
     buttonLayout->addWidget(withdrawButton);
     buttonLayout->addWidget(userInfoButton);
+    buttonLayout->addWidget(makeTransactionButton);
     buttonLayout->addStretch();
 
 
@@ -88,6 +92,12 @@ QWidget* MainBankWindow::mainBankWindow(const UserData& user) {
     QObject::connect(withdrawButton,&QPushButton::clicked,[=] {
     WithdrawFront wf;
         wf.withdraw(user);
+        window->close();
+    });
+
+    QObject::connect(makeTransactionButton,&QPushButton::clicked,[=] {
+        MakeTransaction tr;
+        tr.makeTransaction(user);
         window->close();
     });
 
