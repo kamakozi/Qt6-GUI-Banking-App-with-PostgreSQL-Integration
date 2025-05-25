@@ -43,6 +43,14 @@ add_executable(qtlearn
         FrontEnd/MainWindow/MainBank/MainBankWindow/MainBankWindow.cpp
         FrontEnd/MainWindow/MainBank/MainBankWindow/MainBankWindow.h
         BackEnd/DataServerEndPoint/LoginChecker/UserData.h
+        FrontEnd/MainWindow/MainBank/MainBankWindow/Deposit/DepositFrontEnd.cpp
+        FrontEnd/MainWindow/MainBank/MainBankWindow/Deposit/DepositFrontEnd.h
+        BackEnd/DataServerEndPoint/Deposit/DepositBack.cpp
+        BackEnd/DataServerEndPoint/Deposit/DepositBack.h
+        FrontEnd/MainWindow/MainBank/MainBankWindow/Withdraw/WithdrawFront.cpp
+        FrontEnd/MainWindow/MainBank/MainBankWindow/Withdraw/WithdrawFront.h
+        BackEnd/DataServerEndPoint/WithdrawalBack/WithdrawalBack.cpp
+        BackEnd/DataServerEndPoint/WithdrawalBack/WithdrawalBack.h
 )
 
 # ✅ Link libraries

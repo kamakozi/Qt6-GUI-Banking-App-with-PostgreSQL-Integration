@@ -4,6 +4,8 @@
 
 #ifndef MAINBANKWINDOW_H
 #define MAINBANKWINDOW_H
+#include <QWidget>
+
 #include "../../../../BackEnd/DataServerEndPoint/LoginChecker/UserData.h"
 
 
