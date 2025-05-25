@@ -106,6 +106,9 @@ QWidget* RegisterWindow::registerWindow() {
             QMessageBox::warning(window,"Input error", "Username and password cannot be empty!");
             return;
         }
+        if (!emailInput.contains("@")) {
+            QMessageBox::warning(window,"Invalid email!","Email must contain '@' symbol!");
+        }
         std::string hashedpass = passwordInput.toStdString();
         PasswordHash ph;
         std::string hashedPassword = ph.sha256(hashedpass);

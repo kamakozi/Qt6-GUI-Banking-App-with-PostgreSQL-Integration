@@ -5,6 +5,7 @@
 #include "../../../../BackEnd/DataServerEndPoint/LoginChecker/UserData.h"
 #include "Deposit/DepositFrontEnd.h"
 #include "Withdraw/WithdrawFront.h"
+#include "ShowInfo/ShowInfo.h"
 
 QWidget* MainBankWindow::mainBankWindow(const UserData& user) {
     QWidget* window = new QWidget;
@@ -73,6 +74,11 @@ QWidget* MainBankWindow::mainBankWindow(const UserData& user) {
     mainLayout->addSpacing(20);
     mainLayout->addLayout(buttonLayout);
 
+    QObject::connect(userInfoButton,&QPushButton::clicked,[=] {
+        ShowInfo si;
+        si.showInfo(user);
+        window->close();
+    });
     QObject::connect(depositButton,&QPushButton::clicked,[=] {
         DepositFrontEnd d;
         d.deposit(user);

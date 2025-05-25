@@ -51,6 +51,8 @@ add_executable(qtlearn
         FrontEnd/MainWindow/MainBank/MainBankWindow/Withdraw/WithdrawFront.h
         BackEnd/DataServerEndPoint/WithdrawalBack/WithdrawalBack.cpp
         BackEnd/DataServerEndPoint/WithdrawalBack/WithdrawalBack.h
+        FrontEnd/MainWindow/MainBank/MainBankWindow/ShowInfo/ShowInfo.cpp
+        FrontEnd/MainWindow/MainBank/MainBankWindow/ShowInfo/ShowInfo.h
 )
 
 # ✅ Link libraries
