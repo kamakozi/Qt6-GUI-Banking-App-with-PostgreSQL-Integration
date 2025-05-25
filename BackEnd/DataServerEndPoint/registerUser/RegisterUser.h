@@ -10,7 +10,7 @@
 class RegisterUser {
 public:
     RegisterUser() = default;
-    bool insertUser(const QString& username,const QString& password,const QString& email);
+    bool insertUser(const QString& username,const QString& password,const QString& email, const QString& countrySelector);
 };
 
 

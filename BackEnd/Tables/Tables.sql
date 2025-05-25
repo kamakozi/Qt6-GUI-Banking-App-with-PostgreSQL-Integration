@@ -1,8 +1,17 @@
 
+
+CREATE TABLE IF NOT EXISTS countries(
+   id SERIAL PRIMARY KEY,
+   name TEXT NOT NULL
+);
+INSERT INTO countries (name) VALUES ('slovenia'),('germany'),('usa'),('france'),('austria'),('spain'),('united kingdom'),('italy')
+ON CONFLICT DO NOTHING;
+
 CREATE TABLE IF NOT EXISTS roles (
    id SERIAL PRIMARY KEY,
    name VARCHAR(50) UNIQUE NOT NULL
     );
+
 
 INSERT INTO roles (name)
 VALUES ('user'), ('admin')
@@ -14,6 +23,8 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(50) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
     balance NUMERIC(12,2) DEFAULT 0 CHECK (balance >= 0),
+    iban TEXT UNIQUE NOT NULL,
+    country_id INTEGER NOT NULL REFERENCES countries(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     role_id INTEGER REFERENCES roles(id) ON DELETE SET NULL
     );
@@ -35,3 +46,4 @@ CREATE TABLE IF NOT EXISTS transfer (
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+

@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <sstream>
 #include "../../../BackEnd/DataServerEndPoint/registerUser/PasswordHash/PasswordHash.h"
+#include <QComboBox>
 
 QWidget* RegisterWindow::registerWindow() {
 
@@ -27,6 +28,7 @@ QWidget* RegisterWindow::registerWindow() {
     QLabel *usernameLabel = new QLabel("Username");
     QLabel *passwordLabel = new QLabel("Password");
     QLabel *emailLabel = new QLabel("Email");
+    QLabel *selectCountryLabel = new QLabel("Select country!");
 
     QLineEdit *username =new QLineEdit(window);
     QLineEdit *password = new QLineEdit(window);
@@ -79,6 +81,17 @@ QWidget* RegisterWindow::registerWindow() {
     registerbtn->setStyleSheet(buttonStyle);
     backToLoginBtn->setStyleSheet(buttonStyle);
 
+QComboBox *countryMeni = new QComboBox;
+    countryMeni->addItem("Choose country");
+    countryMeni->addItem("slovenia");
+    countryMeni->addItem("germany");
+    countryMeni->addItem("usa");
+    countryMeni->addItem("france");
+    countryMeni->addItem("austria");
+    countryMeni->addItem("spain");
+    countryMeni->addItem("united Kingdom");
+    countryMeni->addItem("italy");
+
     QVBoxLayout *mainLayout = new QVBoxLayout(window);
     mainLayout ->setSpacing(10);
     mainLayout->setContentsMargins(40,30,40,30);
@@ -90,6 +103,8 @@ QWidget* RegisterWindow::registerWindow() {
     formLayout->addRow(usernameLabel,username);
     formLayout->addRow(passwordLabel,password);
     formLayout->addRow(emailLabel,email);
+    formLayout->addRow(selectCountryLabel);
+    formLayout->addRow(countryMeni);
     mainLayout->addLayout(formLayout);
     mainLayout->addSpacing(10);
     mainLayout->addWidget(registerbtn,0,Qt::AlignCenter);
@@ -101,13 +116,15 @@ QWidget* RegisterWindow::registerWindow() {
         QString usernameInput = username->text();
         QString passwordInput = password->text();
         QString emailInput = email->text();
+        QString countrySelector = countryMeni->currentText();
 
-        if (username->text().isEmpty() || password->text().isEmpty() || email->text().isEmpty()) {
+        if (username->text().isEmpty() || password->text().isEmpty() || email->text().isEmpty() || countrySelector == "Choose Country"){
             QMessageBox::warning(window,"Input error", "Username and password cannot be empty!");
             return;
         }
         if (!emailInput.contains("@")) {
             QMessageBox::warning(window,"Invalid email!","Email must contain '@' symbol!");
+            return;
         }
         std::string hashedpass = passwordInput.toStdString();
         PasswordHash ph;
@@ -119,7 +136,7 @@ QWidget* RegisterWindow::registerWindow() {
         qDebug() << "Email: " << emailInput;
 
         RegisterUser ru;
-        if (ru.insertUser(usernameInput,hashedPass,emailInput)) {
+        if (ru.insertUser(usernameInput,hashedPass,emailInput,countrySelector)) {
             QMessageBox::information(window,"Success","User registered!");
             PopOutWindow pow;
             QWidget *backToLog = pow.createWindow();
