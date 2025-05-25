@@ -6,23 +6,29 @@ A modern C++ banking application built using **Qt6** for the GUI and **PostgreSQ
 
 ##  Features
 
--  **Qt6 GUI**
-  - Clean login and register screens
-  - Styled inputs and buttons with Qt Style Sheets
-  - Register popup window
--  **PostgreSQL Integration**
-  - Database connection using `libpqxx`
-  - `.env` config loader to hide credentials
-  - Auto table creation on first launch
--  **Modular Structure**
-  - Separation of frontend (UI) and backend (DB logic)
-  - Header/source file organization
--  **Dynamic SQL Loading**
-  - Executes SQL schema from `Tables.sql` at startup
+###  UI (Frontend)
+- Clean and responsive **Qt6 interface**
+- Modern dark-themed windows:
+  - Login & Registration
+  - Deposit & Withdrawal
+  - Account Info with role display
+- Styled inputs and buttons (Qt Style Sheets)
+- Error handling with helpful messages (invalid email, wrong credentials, etc.)
+
+### Database (Backend)
+- PostgreSQL integration via **libpqxx**
+- Automatic table creation using SQL schema (`Tables.sql`)
+- Secure `.env` loading for connection credentials
+- Deposit/withdrawal operations directly update database
+
+### Code Architecture
+- Modular file structure: clean separation of UI and logic
+- Header/source file separation for maintainability
+- Dynamic SQL schema loading on startup
 
 ---
 
-##  Built With
+## Built With
 
 - [C++17](https://en.cppreference.com/)
 - [Qt6](https://www.qt.io/)
@@ -32,66 +38,43 @@ A modern C++ banking application built using **Qt6** for the GUI and **PostgreSQ
 
 ---
 
-##  Project Structure
 
-```
-qtlearn/
-├── main.cpp
-├── FrontEnd/
-│   ├── MainWindow/ (Login + Register UI)
-│   └── RegisterLogin/
-├── BackEnd/
-│   ├── DataServerEndPoint/ (DB config + connector)
-│   └── Tables/ (SQL loader)
-├── Tables.sql
-└── CMakeLists.txt
-```
+##  Getting Started
 
----
+### 1. Install Dependencies (macOS example)
 
-## 🛠️ Getting Started
-
-### 1. Install dependencies (macOS example)
-
-```bash
 brew install qt libpq libpqxx
-```
 
-### 2. Link PostgreSQL libraries
+### 2. Link PostgreSQL libraries (if needed)
 
-```bash
 brew link --overwrite --force libpq
-```
 
-### 3. Build the project
+### 3. Build & Run
 
-```bash
 cmake -B build -S .
 cmake --build build
 ./build/qtlearn
-```
 
 ### 4. Set up `.env`
 
-```
+Create a file named `.env` in your project root:
+
 DB_NAME=bankdb
 DB_USER=youruser
 DB_PASSWORD=yourpass
 DB_HOST=localhost
 DB_PORT=5432
-```
 
 ---
 
 ##  Future Features
 
-- Admin dashboard
-- Transaction history
-- Transfer between users
-- Dark/light mode switch
-- Unit tests and CI pipeline
+- Admin dashboard (manage users, roles)
+- User transaction history
+- In-app user-to-user transfers
+- Toggle dark/light themes
+- Unit tests and CI integration
 
 ---
 
-## License
 
