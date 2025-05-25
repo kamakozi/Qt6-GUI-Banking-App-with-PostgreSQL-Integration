@@ -4,6 +4,7 @@
 #include <QBoxLayout>
 #include <QString>
 #include "../MainBankWindow.h"
+#include "TransactionHistory/TransactionHistoryFront.h"
 
 void MakeTransaction::makeTransaction(UserData user) {
     QWidget* window = new QWidget;
@@ -71,6 +72,12 @@ void MakeTransaction::makeTransaction(UserData user) {
     layout->addStretch();
     layout->addWidget(bankLabel);
     layout->addWidget(creditsLabel);
+
+    QObject::connect(seeTransactionsBtn,&QPushButton::clicked,[=] {
+        TransactionHistory th;
+        th.transactionHistory(user);
+        window->close();
+    });
 
     QObject::connect(backBtn, &QPushButton::clicked, [=] {
         MainBankWindow mbw;

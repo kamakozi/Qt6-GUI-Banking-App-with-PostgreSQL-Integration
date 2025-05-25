@@ -55,6 +55,11 @@ add_executable(qtlearn
         FrontEnd/MainWindow/MainBank/MainBankWindow/ShowInfo/ShowInfo.h
         FrontEnd/MainWindow/MainBank/MainBankWindow/Transactions/TransactionFront.cpp
         FrontEnd/MainWindow/MainBank/MainBankWindow/Transactions/TransactionFront.h
+        FrontEnd/MainWindow/MainBank/MainBankWindow/Transactions/TransactionHistory/TransactionHistoryFront.cpp
+        FrontEnd/MainWindow/MainBank/MainBankWindow/Transactions/TransactionHistory/TransactionHistoryFront.h
+        BackEnd/DataServerEndPoint/Transactions/TransactionHistoryBack/TransactionHistoryBack.cpp
+        BackEnd/DataServerEndPoint/Transactions/TransactionHistoryBack/TransactionHistoryBack.h
+        BackEnd/DataServerEndPoint/Transactions/Transaction.h
 )
 
 # ✅ Link libraries

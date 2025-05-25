@@ -15,8 +15,20 @@ UserData WithdrawalBack::withdrawalBack(UserData& user,double amount) {
     xtn.exec(query);
     xtn.commit();
 
+    pqxx::work xxt(conn);
+
+        std::string withdrawalQuery =
+        "INSERT INTO transactions (user_id, type, amount) VALUES (" +
+        xxt.quote(user.id) + ", " +
+        xxt.quote("withdraw") + ", " +
+        xxt.quote(amount) + ");";
+
+    pqxx::result r = xxt.exec(withdrawalQuery);
+        xxt.commit();
+
     return user;
     }catch (std::exception& e) {
         std::cerr << "Unable to withdrew funds! " << e.what() << std::endl;
+        return user;
     }
 }
