@@ -3,6 +3,7 @@
 A modern C++ banking application built using **Qt6** for the GUI and **PostgreSQL** for secure backend data management.
 
 ---
+[▶️ Click here to watch the demo](demo.mp4)
 
 ##  Features
 
